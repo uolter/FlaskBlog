@@ -9,9 +9,6 @@ strip_filter = lambda x: x.strip() if x else None
 def category_choice():
     return Category.query.all()
 
-def person_name():
-    return Person.query.filter_by(email=session['email']).first()
-
 class ArticleCreateForm(Form):
     title = TextField('Title', [validators.Required("Please enter title.")],
                       filters=[strip_filter] )
