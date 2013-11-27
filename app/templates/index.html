@@ -1,11 +1,18 @@
 {% extends 'layout.html' %}
 {% block content %}
+
     <h1>Articles</h1>
     <hr/>
-    {% for post in articles  %}
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.body }}</p>
-    <h6>Created {{ post.created_in_words }} ago</h6>
+    {%   for post in articles %}
+    <h3><a href="{{ url_for('show_article', id=post.id, slug=post.slug) }}">{{ post.title }}</a></h3>
+    <p>{{ post.body|truncate(200)| safe }}</p>
+    <h6>
+        By <a href="author/{{ post.person_name }}">{{ post.person_name }}</a> |
+        {{ post.created_in_words }} ago |
+        <a href="category/{{ post.category_name }}">{{ post.category_name }}</a>
+
+    </h6>
         <hr/>
     {% endfor %}
+
 {% endblock %}

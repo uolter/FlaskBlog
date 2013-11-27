@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="form">
-  <h2>Create Article</h2>
 
-  <form action="{{ url_for('profile') }}" method=post>
+    <h2>Create Article</h2>
+
+
+    <form action="?{{ request.query_string }}" method=post>
     {{ form.hidden_tag() }}
 
     {{ form.title.label }}
@@ -13,9 +14,14 @@
     {{ form.body.label }}
     {{ form.body }}
 
+    {{ form.category.label }}
+    {{ form.category }}<br/>
 
+    {{ form.person_name }}
 
    <input id="submit" name="submit" class="btn btn-inverse" type="submit" value="Create article">
   </form>
-</div>
+        <hr/>
+        <a href="{{ url_for('category') }}" class="btn btn-inverse">Create New Category</a>
+    <hr/>
 {% endblock %}

@@ -5,6 +5,7 @@
       <w>newperson</w>
       <w>phonenumbers</w>
       <w>postgresql</w>
+      <w>tinymce</w>
     </words>
   </dictionary>
 </component>
