@@ -46,9 +46,9 @@ class Article(db.Model):
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     category_name = db.Column(db.String(10), db.ForeignKey(Category.name))
     category = db.relationship(Category)
-    person_name = db.Column(db.String(100), db.ForeignKey(Person.firstname))
+    person_name = db.Column(db.String(100), db.ForeignKey(Person.firstname, onupdate="CASCADE", ondelete="CASCADE"))
     person = db.relationship(Person)
- 
+
     @classmethod
     def all(cls):
         return Article.query.order_by(desc(Article.created)).all()

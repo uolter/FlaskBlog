@@ -1,6 +1,5 @@
-from flask import session
 from flask.ext.wtf import Form
-from wtforms import TextField, validators, PasswordField, TextAreaField, HiddenField, BooleanField
+from wtforms import TextField, validators, PasswordField, TextAreaField, HiddenField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from models import Person,Category
 
@@ -63,3 +62,8 @@ class SigninForm(Form):
 class CategoryCreateForm(Form):
     name = TextField('Name', [validators.required(), validators.length(min=1,max=240)])
     description = TextAreaField('Description', [validators.required()])
+
+class PersonUpdateForm(Form):
+    firstname = TextField("First name", [validators.Required("Please enter your first name.")])
+    lastname = TextField("Last name", [validators.Required("Please enter your last name.")])
+    password = PasswordField('Password', [validators.Required("Please enter a password.")])

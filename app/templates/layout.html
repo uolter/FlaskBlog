@@ -4,14 +4,17 @@
     <title>Contact Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"/>
-
-<script type="text/javascript" src="{{ url_for('static', filename='tinymce/tinymce.min.js') }}"></script>
-<script type="text/javascript">
-tinymce.init({
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script type="text/javascript"> $(document).ready(function () { $('.dropdown-toggle').dropdown(); }); </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript">
+    tinymce.init({
     selector: "textarea"
- });
-</script>
+    });
+    </script>
 </head>
+
 <body>
 <div class="container">
       <div class="page-header">
@@ -19,25 +22,38 @@ tinymce.init({
       </div>
 
  <header>
-     <div class="navbar">
-  <div class="navbar-inner">
+ <div class="navbar navbar-static">
+        <div class="navbar-inner">
+            <a href="{{ url_for('index') }}"class="brand">FlaskBlog</a>
+            <ul role="navigation" class="nav">
+                     {% if 'email' in session %}
 
-    <ul class="nav">
-      <li><a href="{{ url_for('index') }}">Home</a></li>
-          {% if 'email' in session %}
-          <li><a class='active' href="{{ url_for('profile') }}">Profile</a></li>
-          <li><a href="{{ url_for('signout') }}">Sign Out</a></li>
-          {% else %}
-          <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-          <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+                <li><a href="{{ url_for('dashboard', name=name) }}">DashBoard</a></li>
+                <li><a href="{{ url_for('article_create') }}">Create Article</a></li>
+
+            </ul>
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown"
+                       class="dropdown-toggle">Admin Area <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                        <li><a href="{{ url_for('signout') }}">SignOut</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        {% else %}
+            <ul role="navigation" class="nav">
+
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+
+            </ul>
           {% endif %}
-     </ul>
-  </div>
-</div>
-
-
-       
-  </header>
+        </div>
+    </div>
+   </header>
     {% block content %}
 
     {% endblock %}
