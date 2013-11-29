@@ -1,5 +1,5 @@
 FlaskBlog
 =========
 
-Flask Blog
+This is the Blog Engine built in Flask.
 
