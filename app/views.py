@@ -59,11 +59,11 @@ def HTTPNotFound(e):
 @app.route('/article/<int:id>/<slug>')
 def show_article(id, slug):
     article = Article.find_by_id(id)
-    if 'email' not in session:
-        session['email'] = None
-    person = Person.query.filter_by(email=session['email']).first()
-    person_name = article.person_name
-    return render_template('show_article.html', article=article, person=person, person_name=person_name)
+    if 'email' in session:
+        person = Person.query.filter_by(email=session['email']).first()
+        person_name = article.person_name
+        return render_template('show_article.html', article=article, person=person, person_name=person_name)
+    return render_template('show_article.html', article=article)
 
 @app.route('/article/<int:id>/<slug>/edit', methods=['GET', 'POST'])
 def article_update(id, slug):

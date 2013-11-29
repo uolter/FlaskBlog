@@ -1,14 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-
+{% if not session['email'] %}
     <h1>{{ article.title }}</h1>
 
     <p>{{ article.created_in_words }} | {{ article.category }}</p>
     <p>{{ article.body | safe}}</p>
+{% else %}
+    <h1>{{ article.title }}</h1>
+
+    <p>{{ article.created_in_words }} | {{ article.category }}</p>
+    <p>{{ article.body | safe}}</p>
+
     <hr/>
     {% if person_name == person.firstname  %}
     <p><a href="{{ url_for('article_update', id=article.id, slug=article.slug) }}" class="btn btn-inverse">
         Edit Article</a></p>
-
+{% endif %}
     {% endif %}
     {% endblock %}
