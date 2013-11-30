@@ -15,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-manager = Heroku(app)
+manager = Manager(app)
 
 from app import models
 from app import views
