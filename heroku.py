@@ -1,3 +1,2 @@
-from app import app, manager
+from app import app
 
-manager.run(app)
